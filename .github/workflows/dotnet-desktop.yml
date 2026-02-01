@@ -26,7 +26,10 @@ jobs:
       run: msbuild -t:restore ClothesWebNET.Tests\ClothesWebNET.Tests.csproj
 
     - name: Build Solution
-      run: msbuild ClothesWebNET.sln /p:Configuration=Release /p:DeployOnBuild=true
+      run: msbuild ClothesWebNET.sln /p:Configuration=Release
+
+    - name: Build Test Project
+      run: msbuild ClothesWebNET.Tests\ClothesWebNET.Tests.csproj /p:Configuration=Release
 
     - name: Debug - List Build Output
       run: Get-ChildItem -Path ClothesWebNET.Tests\bin -Recurse
