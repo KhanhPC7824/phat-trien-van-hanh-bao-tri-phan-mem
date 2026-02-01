@@ -19,11 +19,17 @@ jobs:
     - name: Setup NuGet
       uses: NuGet/setup-nuget@v1.0
 
-    - name: Restore NuGet Packages
+    - name: Restore NuGet Packages (Legacy)
       run: nuget restore ClothesWebNET.sln
+
+    - name: Restore NuGet Packages (Test Project)
+      run: msbuild -t:restore ClothesWebNET.Tests\ClothesWebNET.Tests.csproj
 
     - name: Build Solution
       run: msbuild ClothesWebNET.sln /p:Configuration=Release /p:DeployOnBuild=true
+
+    - name: Debug - List Build Output
+      run: dir /s ClothesWebNET.Tests\bin
 
     - name: Setup VSTest
       uses: darenm/Setup-VSTest@v1
