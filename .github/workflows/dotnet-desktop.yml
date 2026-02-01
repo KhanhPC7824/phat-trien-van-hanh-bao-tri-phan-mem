@@ -25,6 +25,9 @@ jobs:
     - name: Build Solution
       run: msbuild ClothesWebNET.sln /p:Configuration=Release /p:DeployOnBuild=true
 
+    - name: Build Tests
+      run: dotnet build ClothesWebNET.Tests\ClothesWebNET.Tests.csproj --configuration Release
+
     - name: Setup VSTest
       uses: darenm/Setup-VSTest@v1
 
