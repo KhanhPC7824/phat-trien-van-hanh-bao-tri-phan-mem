@@ -1,0 +1,50 @@
+ALTER TABLE [dbo].[DetailBIll] ADD  DEFAULT (newid()) FOR [idDetailBill]
+GO
+ALTER TABLE [dbo].[DetailBIll] ADD  DEFAULT (newid()) FOR [idProduct]
+GO
+ALTER TABLE [dbo].[ImageProduct] ADD  DEFAULT (newid()) FOR [idImage]
+GO
+ALTER TABLE [dbo].[ImageProduct] ADD  DEFAULT (newid()) FOR [idProduct]
+GO
+ALTER TABLE [dbo].[Permission] ADD  DEFAULT (newid()) FOR [idPermission]
+GO
+ALTER TABLE [dbo].[Permission] ADD  DEFAULT ((1)) FOR [level]
+GO
+ALTER TABLE [dbo].[Product] ADD  DEFAULT (newid()) FOR [idProduct]
+GO
+ALTER TABLE [dbo].[Product] ADD  DEFAULT (newid()) FOR [idType]
+GO
+ALTER TABLE [dbo].[Types] ADD  DEFAULT (newid()) FOR [idType]
+GO
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF__User__idUser__3B75D760]  DEFAULT (newid()) FOR [idUser]
+GO
+ALTER TABLE [dbo].[User] ADD  CONSTRAINT [DF__User__idPermissi__3C69FB99]  DEFAULT (newid()) FOR [idPermission]
+GO
+ALTER TABLE [dbo].[Voucher] ADD  DEFAULT (newid()) FOR [idVoucher]
+GO
+ALTER TABLE [dbo].[Bill]  WITH CHECK ADD  CONSTRAINT [FK__Bill__idUser__5070F446] FOREIGN KEY([idUser])
+REFERENCES [dbo].[User] ([idUser])
+GO
+ALTER TABLE [dbo].[Bill] CHECK CONSTRAINT [FK__Bill__idUser__5070F446]
+GO
+ALTER TABLE [dbo].[DetailBIll]  WITH CHECK ADD FOREIGN KEY([idBill])
+REFERENCES [dbo].[Bill] ([idBill])
+GO
+ALTER TABLE [dbo].[DetailBIll]  WITH CHECK ADD FOREIGN KEY([idProduct])
+REFERENCES [dbo].[Product] ([idProduct])
+GO
+ALTER TABLE [dbo].[ImageProduct]  WITH CHECK ADD FOREIGN KEY([idProduct])
+REFERENCES [dbo].[Product] ([idProduct])
+GO
+ALTER TABLE [dbo].[Product]  WITH CHECK ADD FOREIGN KEY([idType])
+REFERENCES [dbo].[Types] ([idType])
+GO
+ALTER TABLE [dbo].[User]  WITH CHECK ADD  CONSTRAINT [FK__User__idPermissi__59063A47] FOREIGN KEY([idPermission])
+REFERENCES [dbo].[Permission] ([idPermission])
+GO
+ALTER TABLE [dbo].[User] CHECK CONSTRAINT [FK__User__idPermissi__59063A47]
+GO
+USE [master]
+GO
+ALTER DATABASE [CLOTHES] SET  READ_WRITE 
+GO
