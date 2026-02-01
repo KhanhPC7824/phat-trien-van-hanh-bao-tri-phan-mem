@@ -1,0 +1,32 @@
+name: Build and Test
+
+on:
+  push:
+    branches: [ "main", "develop" ]
+  pull_request:
+    branches: [ "main", "develop" ]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1.1
+
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1.0
+
+    - name: Restore NuGet Packages
+      run: nuget restore ClothesWebNET.sln
+
+    - name: Build Solution
+      run: msbuild ClothesWebNET.sln /p:Configuration=Release /p:DeployOnBuild=true
+
+    - name: Setup VSTest
+      uses: darenm/Setup-VSTest@v1
+
+    - name: Run Unit Tests
+      run: vstest.console.exe .\ClothesWebNET.Tests\bin\Debug\net472\ClothesWebNET.Tests.dll
