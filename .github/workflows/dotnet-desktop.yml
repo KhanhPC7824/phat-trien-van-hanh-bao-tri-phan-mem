@@ -29,7 +29,7 @@ jobs:
       run: msbuild ClothesWebNET.sln /p:Configuration=Release /p:DeployOnBuild=true
 
     - name: Debug - List Build Output
-      run: dir /s ClothesWebNET.Tests\bin
+      run: Get-ChildItem -Path ClothesWebNET.Tests\bin -Recurse
 
     - name: Setup VSTest
       uses: darenm/Setup-VSTest@v1
