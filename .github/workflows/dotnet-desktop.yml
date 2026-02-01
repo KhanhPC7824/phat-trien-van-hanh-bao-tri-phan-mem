@@ -20,7 +20,7 @@ jobs:
       uses: NuGet/setup-nuget@v1.0
 
     - name: Restore NuGet Packages
-      run: msbuild -t:restore ClothesWebNET.sln
+      run: nuget restore ClothesWebNET.sln
 
     - name: Build Solution
       run: msbuild ClothesWebNET.sln /p:Configuration=Release /p:DeployOnBuild=true
