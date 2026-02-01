@@ -20,13 +20,10 @@ jobs:
       uses: NuGet/setup-nuget@v1.0
 
     - name: Restore NuGet Packages
-      run: nuget restore ClothesWebNET.sln
+      run: msbuild -t:restore ClothesWebNET.sln
 
     - name: Build Solution
       run: msbuild ClothesWebNET.sln /p:Configuration=Release /p:DeployOnBuild=true
-
-    - name: Build Tests
-      run: dotnet build ClothesWebNET.Tests\ClothesWebNET.Tests.csproj --configuration Release
 
     - name: Setup VSTest
       uses: darenm/Setup-VSTest@v1
