@@ -29,4 +29,4 @@ jobs:
       uses: darenm/Setup-VSTest@v1
 
     - name: Run Unit Tests
-      run: vstest.console.exe .\ClothesWebNET.Tests\bin\Debug\net472\ClothesWebNET.Tests.dll
+      run: vstest.console.exe .\ClothesWebNET.Tests\bin\Release\net472\ClothesWebNET.Tests.dll
